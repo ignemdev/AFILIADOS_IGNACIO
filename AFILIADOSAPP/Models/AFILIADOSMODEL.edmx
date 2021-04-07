@@ -1,0 +1,261 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="AFILIADOS_IGNACIOModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AFILIADOS">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Apellido" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Sexo" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="Cedula" Type="varchar" MaxLength="11" Nullable="false" />
+          <Property Name="NSS" Type="varchar" MaxLength="11" Nullable="false" />
+          <Property Name="FechaRegistro" Type="datetime" Nullable="false" />
+          <Property Name="MontoConsumido" Type="float" Nullable="false" />
+          <Property Name="EstatusId" Type="int" Nullable="false" />
+          <Property Name="PlanId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ESTATUS">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Estatus" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PLANES">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PlanDescripcion" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="MontoCobertura" Type="float" Nullable="false" />
+          <Property Name="FechaRegistro" Type="datetime" Nullable="false" />
+          <Property Name="EstatusId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AFILIADOS_ESTATUS">
+          <End Role="ESTATUS" Type="Self.ESTATUS" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AFILIADOS" Type="Self.AFILIADOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTATUS">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AFILIADOS">
+              <PropertyRef Name="EstatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AFILIADOS_PLANES">
+          <End Role="PLANES" Type="Self.PLANES" Multiplicity="1" />
+          <End Role="AFILIADOS" Type="Self.AFILIADOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLANES">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AFILIADOS">
+              <PropertyRef Name="PlanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PLANES_ESTATUS">
+          <End Role="ESTATUS" Type="Self.ESTATUS" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PLANES" Type="Self.PLANES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTATUS">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PLANES">
+              <PropertyRef Name="EstatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AFILIADOS_IGNACIOModelStoreContainer">
+          <EntitySet Name="AFILIADOS" EntityType="Self.AFILIADOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ESTATUS" EntityType="Self.ESTATUS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PLANES" EntityType="Self.PLANES" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AFILIADOS_ESTATUS" Association="Self.FK_AFILIADOS_ESTATUS">
+            <End Role="ESTATUS" EntitySet="ESTATUS" />
+            <End Role="AFILIADOS" EntitySet="AFILIADOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AFILIADOS_PLANES" Association="Self.FK_AFILIADOS_PLANES">
+            <End Role="PLANES" EntitySet="PLANES" />
+            <End Role="AFILIADOS" EntitySet="AFILIADOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PLANES_ESTATUS" Association="Self.FK_PLANES_ESTATUS">
+            <End Role="ESTATUS" EntitySet="ESTATUS" />
+            <End Role="PLANES" EntitySet="PLANES" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AFILIADOS_IGNACIOModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AFILIADOS">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Apellido" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sexo" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cedula" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NSS" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MontoConsumido" Type="Double" Nullable="false" />
+          <Property Name="EstatusId" Type="Int32" Nullable="false" />
+          <Property Name="PlanId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ESTATUS" Relationship="Self.FK_AFILIADOS_ESTATUS" FromRole="AFILIADOS" ToRole="ESTATUS" />
+          <NavigationProperty Name="PLANES" Relationship="Self.FK_AFILIADOS_PLANES" FromRole="AFILIADOS" ToRole="PLANES" />
+        </EntityType>
+        <EntityType Name="ESTATUS">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Estatus1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="AFILIADOS" Relationship="Self.FK_AFILIADOS_ESTATUS" FromRole="ESTATUS" ToRole="AFILIADOS" />
+          <NavigationProperty Name="PLANES" Relationship="Self.FK_PLANES_ESTATUS" FromRole="ESTATUS" ToRole="PLANES" />
+        </EntityType>
+        <EntityType Name="PLANES">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PlanDescripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MontoCobertura" Type="Double" Nullable="false" />
+          <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EstatusId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AFILIADOS" Relationship="Self.FK_AFILIADOS_PLANES" FromRole="PLANES" ToRole="AFILIADOS" />
+          <NavigationProperty Name="ESTATUS" Relationship="Self.FK_PLANES_ESTATUS" FromRole="PLANES" ToRole="ESTATUS" />
+        </EntityType>
+        <Association Name="FK_AFILIADOS_ESTATUS">
+          <End Role="ESTATUS" Type="Self.ESTATUS" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AFILIADOS" Type="Self.AFILIADOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTATUS">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AFILIADOS">
+              <PropertyRef Name="EstatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AFILIADOS_PLANES">
+          <End Role="PLANES" Type="Self.PLANES" Multiplicity="1" />
+          <End Role="AFILIADOS" Type="Self.AFILIADOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLANES">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AFILIADOS">
+              <PropertyRef Name="PlanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PLANES_ESTATUS">
+          <End Role="ESTATUS" Type="Self.ESTATUS" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PLANES" Type="Self.PLANES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTATUS">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PLANES">
+              <PropertyRef Name="EstatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AFILIADOS_IGNACIOEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AFILIADOS" EntityType="Self.AFILIADOS" />
+          <EntitySet Name="ESTATUS" EntityType="Self.ESTATUS" />
+          <EntitySet Name="PLANES" EntityType="Self.PLANES" />
+          <AssociationSet Name="FK_AFILIADOS_ESTATUS" Association="Self.FK_AFILIADOS_ESTATUS">
+            <End Role="ESTATUS" EntitySet="ESTATUS" />
+            <End Role="AFILIADOS" EntitySet="AFILIADOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AFILIADOS_PLANES" Association="Self.FK_AFILIADOS_PLANES">
+            <End Role="PLANES" EntitySet="PLANES" />
+            <End Role="AFILIADOS" EntitySet="AFILIADOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PLANES_ESTATUS" Association="Self.FK_PLANES_ESTATUS">
+            <End Role="ESTATUS" EntitySet="ESTATUS" />
+            <End Role="PLANES" EntitySet="PLANES" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AFILIADOS_IGNACIOModelStoreContainer" CdmEntityContainer="AFILIADOS_IGNACIOEntities">
+          <EntitySetMapping Name="AFILIADOS">
+            <EntityTypeMapping TypeName="AFILIADOS_IGNACIOModel.AFILIADOS">
+              <MappingFragment StoreEntitySet="AFILIADOS">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="NSS" ColumnName="NSS" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="MontoConsumido" ColumnName="MontoConsumido" />
+                <ScalarProperty Name="EstatusId" ColumnName="EstatusId" />
+                <ScalarProperty Name="PlanId" ColumnName="PlanId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ESTATUS">
+            <EntityTypeMapping TypeName="AFILIADOS_IGNACIOModel.ESTATUS">
+              <MappingFragment StoreEntitySet="ESTATUS">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Estatus1" ColumnName="Estatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PLANES">
+            <EntityTypeMapping TypeName="AFILIADOS_IGNACIOModel.PLANES">
+              <MappingFragment StoreEntitySet="PLANES">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PlanDescripcion" ColumnName="PlanDescripcion" />
+                <ScalarProperty Name="MontoCobertura" ColumnName="MontoCobertura" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="EstatusId" ColumnName="EstatusId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,103 @@
+﻿@model IEnumerable<AFILIADOSAPP.Models.AFILIADOS>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null,new {@class="btn btn-success" })
+</p>
+
+<form id="consultaForm" method="get" class="form-inline">
+    <div class="form-group">
+        <div class="col-lg-6">
+            <input name="criterio" id="criterio" placeholder="Criterio para buscar" class="form-control" />
+        </div>
+        <div class="col-lg-3">
+            <a href="javascript:document.getElementById('consultaForm').submit()" class="btn btn-success">Buscar</a>
+        </div>
+        <div class="col-lg-3">
+            @Html.ActionLink("Cancelar busqueda", "Index", null, new { @class = "btn btn-danger" })
+        </div>
+    </div>
+</form>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Apellido)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sexo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cedula)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NSS)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaRegistro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MontoConsumido)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ESTATUS.Estatus1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PLANES.PlanDescripcion)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Id)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Nombre)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Apellido)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Sexo)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Cedula)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.NSS)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.FechaRegistro)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.MontoConsumido)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ESTATUS.Estatus1)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.PLANES.PlanDescripcion)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+        @Html.ActionLink("Monto", "AddAmount", new { id = item.Id }) |
+        @*@Html.ActionLink("Details", "Details", new { id = item.Id }) |*@
+        @Html.ActionLink((item.EstatusId == 2)? "Activar" : "Inactivar", (item.EstatusId == 2) ? "Able" : "Disable", new { id = item.Id })
+    </td>
+</tr>
+}
+
+</table>

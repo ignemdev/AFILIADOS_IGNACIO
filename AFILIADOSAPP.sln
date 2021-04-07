@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31129.286
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AFILIADOSAPP", "AFILIADOSAPP\AFILIADOSAPP.csproj", "{DF9A02C9-C472-4D0E-AC78-D90D6D7B39A0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DF9A02C9-C472-4D0E-AC78-D90D6D7B39A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF9A02C9-C472-4D0E-AC78-D90D6D7B39A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF9A02C9-C472-4D0E-AC78-D90D6D7B39A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF9A02C9-C472-4D0E-AC78-D90D6D7B39A0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1DC8FC00-3108-46BC-A792-7F7DF2FA3927}
+	EndGlobalSection
+EndGlobal

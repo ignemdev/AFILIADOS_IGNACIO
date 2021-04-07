@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AFILIADOS_IGNACIOModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AFILIADOS">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="Apellido" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="Sexo" Type="varchar" MaxLength="12" Nullable="false" />
+    <Property Name="Cedula" Type="varchar" MaxLength="11" Nullable="false" />
+    <Property Name="NSS" Type="varchar" MaxLength="11" Nullable="false" />
+    <Property Name="FechaRegistro" Type="datetime" Nullable="false" />
+    <Property Name="MontoConsumido" Type="float" Nullable="false" />
+    <Property Name="EstatusId" Type="int" Nullable="false" />
+    <Property Name="PlanId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ESTATUS">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Estatus" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PLANES">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PlanDescripcion" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="MontoCobertura" Type="float" Nullable="false" />
+    <Property Name="FechaRegistro" Type="datetime" Nullable="false" />
+    <Property Name="EstatusId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_AFILIADOS_ESTATUS">
+    <End Role="ESTATUS" Type="Self.ESTATUS" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AFILIADOS" Type="Self.AFILIADOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ESTATUS">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AFILIADOS">
+        <PropertyRef Name="EstatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AFILIADOS_PLANES">
+    <End Role="PLANES" Type="Self.PLANES" Multiplicity="1" />
+    <End Role="AFILIADOS" Type="Self.AFILIADOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PLANES">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AFILIADOS">
+        <PropertyRef Name="PlanId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PLANES_ESTATUS">
+    <End Role="ESTATUS" Type="Self.ESTATUS" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PLANES" Type="Self.PLANES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ESTATUS">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PLANES">
+        <PropertyRef Name="EstatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="AFILIADOS_IGNACIOModelStoreContainer">
+    <EntitySet Name="AFILIADOS" EntityType="Self.AFILIADOS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ESTATUS" EntityType="Self.ESTATUS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PLANES" EntityType="Self.PLANES" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_AFILIADOS_ESTATUS" Association="Self.FK_AFILIADOS_ESTATUS">
+      <End Role="ESTATUS" EntitySet="ESTATUS" />
+      <End Role="AFILIADOS" EntitySet="AFILIADOS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AFILIADOS_PLANES" Association="Self.FK_AFILIADOS_PLANES">
+      <End Role="PLANES" EntitySet="PLANES" />
+      <End Role="AFILIADOS" EntitySet="AFILIADOS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PLANES_ESTATUS" Association="Self.FK_PLANES_ESTATUS">
+      <End Role="ESTATUS" EntitySet="ESTATUS" />
+      <End Role="PLANES" EntitySet="PLANES" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

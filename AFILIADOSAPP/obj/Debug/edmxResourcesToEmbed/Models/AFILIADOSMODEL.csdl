@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AFILIADOS_IGNACIOModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AFILIADOS">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Apellido" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Sexo" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Cedula" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NSS" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="MontoConsumido" Type="Double" Nullable="false" />
+    <Property Name="EstatusId" Type="Int32" Nullable="false" />
+    <Property Name="PlanId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ESTATUS" Relationship="Self.FK_AFILIADOS_ESTATUS" FromRole="AFILIADOS" ToRole="ESTATUS" />
+    <NavigationProperty Name="PLANES" Relationship="Self.FK_AFILIADOS_PLANES" FromRole="AFILIADOS" ToRole="PLANES" />
+  </EntityType>
+  <EntityType Name="ESTATUS">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Estatus1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="AFILIADOS" Relationship="Self.FK_AFILIADOS_ESTATUS" FromRole="ESTATUS" ToRole="AFILIADOS" />
+    <NavigationProperty Name="PLANES" Relationship="Self.FK_PLANES_ESTATUS" FromRole="ESTATUS" ToRole="PLANES" />
+  </EntityType>
+  <EntityType Name="PLANES">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PlanDescripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MontoCobertura" Type="Double" Nullable="false" />
+    <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EstatusId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AFILIADOS" Relationship="Self.FK_AFILIADOS_PLANES" FromRole="PLANES" ToRole="AFILIADOS" />
+    <NavigationProperty Name="ESTATUS" Relationship="Self.FK_PLANES_ESTATUS" FromRole="PLANES" ToRole="ESTATUS" />
+  </EntityType>
+  <Association Name="FK_AFILIADOS_ESTATUS">
+    <End Role="ESTATUS" Type="Self.ESTATUS" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AFILIADOS" Type="Self.AFILIADOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ESTATUS">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AFILIADOS">
+        <PropertyRef Name="EstatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AFILIADOS_PLANES">
+    <End Role="PLANES" Type="Self.PLANES" Multiplicity="1" />
+    <End Role="AFILIADOS" Type="Self.AFILIADOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PLANES">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AFILIADOS">
+        <PropertyRef Name="PlanId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PLANES_ESTATUS">
+    <End Role="ESTATUS" Type="Self.ESTATUS" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PLANES" Type="Self.PLANES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ESTATUS">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PLANES">
+        <PropertyRef Name="EstatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="AFILIADOS_IGNACIOEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AFILIADOS" EntityType="Self.AFILIADOS" />
+    <EntitySet Name="ESTATUS" EntityType="Self.ESTATUS" />
+    <EntitySet Name="PLANES" EntityType="Self.PLANES" />
+    <AssociationSet Name="FK_AFILIADOS_ESTATUS" Association="Self.FK_AFILIADOS_ESTATUS">
+      <End Role="ESTATUS" EntitySet="ESTATUS" />
+      <End Role="AFILIADOS" EntitySet="AFILIADOS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AFILIADOS_PLANES" Association="Self.FK_AFILIADOS_PLANES">
+      <End Role="PLANES" EntitySet="PLANES" />
+      <End Role="AFILIADOS" EntitySet="AFILIADOS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PLANES_ESTATUS" Association="Self.FK_PLANES_ESTATUS">
+      <End Role="ESTATUS" EntitySet="ESTATUS" />
+      <End Role="PLANES" EntitySet="PLANES" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

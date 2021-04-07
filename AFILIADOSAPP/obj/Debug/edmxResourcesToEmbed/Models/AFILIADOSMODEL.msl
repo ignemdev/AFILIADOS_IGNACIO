@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AFILIADOS_IGNACIOModelStoreContainer" CdmEntityContainer="AFILIADOS_IGNACIOEntities">
+    <EntitySetMapping Name="AFILIADOS">
+      <EntityTypeMapping TypeName="AFILIADOS_IGNACIOModel.AFILIADOS">
+        <MappingFragment StoreEntitySet="AFILIADOS">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+          <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+          <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+          <ScalarProperty Name="NSS" ColumnName="NSS" />
+          <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+          <ScalarProperty Name="MontoConsumido" ColumnName="MontoConsumido" />
+          <ScalarProperty Name="EstatusId" ColumnName="EstatusId" />
+          <ScalarProperty Name="PlanId" ColumnName="PlanId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ESTATUS">
+      <EntityTypeMapping TypeName="AFILIADOS_IGNACIOModel.ESTATUS">
+        <MappingFragment StoreEntitySet="ESTATUS">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Estatus1" ColumnName="Estatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PLANES">
+      <EntityTypeMapping TypeName="AFILIADOS_IGNACIOModel.PLANES">
+        <MappingFragment StoreEntitySet="PLANES">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PlanDescripcion" ColumnName="PlanDescripcion" />
+          <ScalarProperty Name="MontoCobertura" ColumnName="MontoCobertura" />
+          <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+          <ScalarProperty Name="EstatusId" ColumnName="EstatusId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
